@@ -20,4 +20,4 @@ jobs:
         run: ls -la
 
       - name: Show src/index.html
-        run: cat src/index.html
+        run: cat s../index.html
