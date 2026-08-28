@@ -61,7 +61,7 @@ jobs:
       - name: Download build output
         uses: actions/download-artifact@v7
         with:
-          name: web-dist
+          name: site-build
           path: ./dist
 
       - name: Inspect build output
