@@ -32,6 +32,7 @@ jobs:
         with:
           name: test-report
           path: reports/
+          retention-days: 5
 
   lint:
     runs-on: ubuntu-latest
@@ -59,7 +60,7 @@ jobs:
       - name: Upload build output
         uses: actions/upload-artifact@v4
         with:
-          name: site-build
+          name: web-dist
           path: dist/
           retention-days: 7
 
@@ -72,8 +73,14 @@ jobs:
       - name: Download build output
         uses: actions/download-artifact@v4
         with:
-          name: site-build
+          name: web-dist
           path: ./dist
+
+      - name: Download test report
+        uses: actions/download-artifact@v4
+        with:
+          name: test-report
+          path: ./reports
 
       - name: Inspect build output
         run: |
