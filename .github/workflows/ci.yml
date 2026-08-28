@@ -1,20 +1,23 @@
 name: CI
 
-on: #trigger
-  workflow_dispatch: #manual button to run this Workflow
+on:
+  workflow_dispatch:
 
 jobs:
-  hello: #jobname
+  hello:
     runs-on: ubuntu-latest
 
     steps:
-        
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
+
       - name: Show environment
         run: |
-          echo "Hello from GitHub Actions" #print
-          uname -a #name of QA
-          pwd # print the working directory
+          echo "Hello from GitHub Actions"
+          uname -a
+          pwd
 
       - name: List files
         run: ls -la
+
+      - name: Show src/index.html
+        run: cat src/index.html
