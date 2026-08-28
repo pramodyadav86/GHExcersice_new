@@ -32,6 +32,7 @@ jobs:
         with:
           name: test-report
           path: reports/
+          retention-days: 5
           
 
   lint:
@@ -75,6 +76,12 @@ jobs:
         with:
           name: site-build
           path: ./dist
+
+      - name: Download test report
+        uses: actions/download-artifact@v7
+        with:
+          name: test-report
+          path: ./reports
 
       - name: Inspect build output
         run: |
