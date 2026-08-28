@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
       - name: Show trigger
         run: echo "Triggered by ${{ github.event_name }}"
@@ -28,15 +28,13 @@ jobs:
           echo "All tests passed" > reports/test-report.txt
 
       - name: Upload test report
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: reports/
           retention-days: 5
-          
 
   lint:
-    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -46,11 +44,13 @@ jobs:
         run: echo "Lint passed"
 
   build:
-    needs: test
+    needs:
+      - test
+      - lint
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
       - name: Build application
         run: |
@@ -58,27 +58,26 @@ jobs:
           cp src/index.html dist/index.html
 
       - name: Upload build output
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: site-build
           path: dist/
           retention-days: 7
 
   deploy-demo:
-    needs: 
+    needs:
       - build
-      - lint
     runs-on: ubuntu-latest
 
     steps:
       - name: Download build output
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: site-build
           path: ./dist
 
       - name: Download test report
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: test-report
           path: ./reports
