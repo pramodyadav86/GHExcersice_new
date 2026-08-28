@@ -52,7 +52,9 @@ jobs:
           retention-days: 7
 
   deploy-demo:
-    needs: build
+    needs: 
+      - build
+      - lint
     runs-on: ubuntu-latest
 
     steps:
