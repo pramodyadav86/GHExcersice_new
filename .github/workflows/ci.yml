@@ -76,12 +76,6 @@ jobs:
           name: site-build
           path: ./dist
 
-      - name: Download test report
-        uses: actions/download-artifact@v4
-        with:
-          name: test-report
-          path: ./reports
-
       - name: Inspect build output
         run: |
           ls -R dist
