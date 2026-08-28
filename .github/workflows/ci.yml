@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+        
+      - uses: actions/checkout@v7
       - name: Show environment
         run: |
           echo "Hello from GitHub Actions" #print
